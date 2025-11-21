@@ -1,3 +1,11 @@
+'''
+Author: Easonyesheng preacher@sjtu.edu.cn
+Date: 2025-11-18 12:12:34
+LastEditors: Easonyesheng preacher@sjtu.edu.cn
+LastEditTime: 2025-11-21 17:00:15
+FilePath: /nerfstudio/research/ref_ray/third_party/vggt/vggt/models/vggt.py
+Description: 
+'''
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 # All rights reserved.
 #
@@ -8,10 +16,11 @@ import torch
 import torch.nn as nn
 from huggingface_hub import PyTorchModelHubMixin  # used for model hub
 
-from vggt.models.aggregator import Aggregator
-from vggt.heads.camera_head import CameraHead
-from vggt.heads.dpt_head import DPTHead
-from vggt.heads.track_head import TrackHead
+
+from ..models.aggregator import Aggregator
+from ..heads.camera_head import CameraHead
+from ..heads.dpt_head import DPTHead
+from ..heads.track_head import TrackHead
 
 
 class VGGT(nn.Module, PyTorchModelHubMixin):
