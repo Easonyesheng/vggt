@@ -2,7 +2,7 @@
 Author: Easonyesheng preacher@sjtu.edu.cn
 Date: 2025-11-18 12:12:34
 LastEditors: Easonyesheng preacher@sjtu.edu.cn
-LastEditTime: 2025-11-21 17:00:15
+LastEditTime: 2025-11-21 18:49:21
 FilePath: /nerfstudio/research/ref_ray/third_party/vggt/vggt/models/vggt.py
 Description: 
 '''
@@ -104,3 +104,21 @@ class VGGT(nn.Module, PyTorchModelHubMixin):
 
         return predictions
 
+    def run_aggregator(self, images: torch.Tensor):
+        """
+        Run the aggregator on the input images.
+
+        Args:
+            images (torch.Tensor): Input images with shape [B, S, 3, H, W].
+
+        Returns:
+            tuple: A tuple containing:
+                - aggregated_tokens_list (list): List of aggregated tokens from each iteration.
+                - patch_start_idx (torch.Tensor): Start indices of patches in the aggregated tokens.
+        """
+        # If without batch dimension, add it
+        if len(images.shape) == 4:
+            images = images.unsqueeze(0)
+            
+        tokens_list, patch_start_idx = self.aggregator(images)
+        return tokens_list, patch_start_idx
